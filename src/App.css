@@ -97,7 +97,6 @@
   margin-left: 20px;
 }
 .img-temp {
-  width: 256px;
   height: 256px;
   margin-top: 20px;
 }
@@ -246,6 +245,10 @@
 }
 .dark-text {
   color: #000;
+}
+.ant-select-selector {
+  background-color: transparent !important;
+  height: 46px !important;
 }
 .light-text {
   color: #FFF;
