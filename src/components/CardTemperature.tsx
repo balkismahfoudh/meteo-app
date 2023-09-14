@@ -8,9 +8,10 @@ export interface CardTemperatureProps {
     variant?: "default" | "center"
     temperature?: string
     backroundImage?: string
+    isTextDark?: boolean
 }
 
-export const CardTemperature = ({ variant, temperature, backroundImage }: CardTemperatureProps) => {
+export const CardTemperature = ({ variant, temperature, backroundImage, isTextDark }: CardTemperatureProps) => {
     const [currentDay, setCurrentDay] = useState('');
     const [currentTime, setCurrentTime] = useState('');
     const [weatherType, setWeatherType] = useState('')
@@ -44,14 +45,18 @@ export const CardTemperature = ({ variant, temperature, backroundImage }: CardTe
     }
 
     return <div>
-        <p style={{textAlign: "left", fontWeight: 400, marginLeft: 20}} className='title-temp'>{currentDay}, {currentTime}</p>
+        <p style={{textAlign: "left", fontWeight: 400, marginLeft: 20}} className={isTextDark ? 'title-temp' : 'title-temp-light'}>{currentDay}, {currentTime}</p>
         <div className='card-temp'>
         
         {backroundImage === 'img-background-rainy' && <img className='img-temp' src= {rainy}/>}
         {backroundImage === 'img-background-cloudly' && <img className='img-temp' src= {cloud}/>}
         {backroundImage === 'img-background-sunny' && <img className='img-temp' src= {sunny}/>}
         {backroundImage === 'img-background-mostly-sunny' && <img className='img-temp' src= {mostlySunny}/>}
-        <p className='temp-text'>{temperature}°C</p>
+        <p className={isTextDark ? 'temp-text' : 'temp-text-light' }>{temperature}°C</p>
+        {backroundImage === "img-background-rainy" && <p className={isTextDark ? 'sub-text-temp' : 'sub-text-temp-light'}>Rainy</p>}
+        {backroundImage === "img-background-cloudly" && <p className={isTextDark ? 'sub-text-temp' : 'sub-text-temp-light'}>Cloudy</p>}
+        {backroundImage === "img-background-sunny" && <p className={isTextDark ? 'sub-text-temp' : 'sub-text-temp-light'}>Sunny</p>}
+        {backroundImage === "img-background-mostly-sunny" && <p className={isTextDark ? 'sub-text-temp' : 'sub-text-temp-light'}>Mostly sunny</p>}
         </div>
         
     </div>

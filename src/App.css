@@ -107,9 +107,26 @@
   z-index: 9;
   position: relative;
   text-align: left;
+  color: #000;
+}
+.title-temp-light {
+  font-size: 40px;
+  margin-top: 35px;
+  z-index: 9;
+  position: relative;
+  text-align: left;
+  color: #FFF;
 }
 .temp-text {
   color: #000;
+  font-size: 118px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 30px;
+}
+.temp-text-light {
+  color: #FFF;
   font-size: 118px;
   font-style: normal;
   font-weight: 400;
@@ -140,6 +157,15 @@
   font-weight: 400;
   line-height: normal;
 }
+.title-card-meteo-light {
+  color: #FFF;
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 .separator-vertical {
   width: 1px;
   height: 740px;
@@ -149,10 +175,32 @@
   margin-top: 120px;
   z-index: 99;
 }
+.sub-text-temp {
+  color: #000;
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 37px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: -100px;
+}
+.sub-text-temp-light {
+  color: #FFF;
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 37px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: -100px;
+}
 .img-uv {
-  width: 206px;
   height: 170px;
   margin-bottom: -140px;
+  margin-top: -20px;
+  height: 170px;
+  margin-bottom: -126px;
 }
 .uv-text {
   color: #000;
@@ -172,6 +220,14 @@
   font-weight: 400;
   line-height: normal;
 }
+.uv-sub-title-light {
+  color: #FFF;
+  font-family: Comfortaa;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 .text-wind {
   color: #000;
   font-family: Comfortaa;
@@ -179,6 +235,20 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.text-wind-light {
+  color: #FFF;
+  font-family: Comfortaa;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.dark-text {
+  color: #000;
+}
+.light-text {
+  color: #FFF;
 }
 @media (max-width: 768px) {
   .img-background-cloudly {

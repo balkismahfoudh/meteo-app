@@ -24,9 +24,10 @@ export interface CardMeteoProps {
     sunset?: string
     humidity?: string
     visibility?: string
+    isTextDark?: boolean
 }
 
-export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visibility }: CardMeteoProps) => {
+export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visibility, isTextDark }: CardMeteoProps) => {
     if (component === "uv") {
         return (
             <div className='card-component'>
@@ -46,14 +47,14 @@ export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visi
                 {parseInt(uv as string) >= 13 && parseInt(uv as string) < 14 && <img className='img-uv' src={UV13_dark} />}
                 {parseInt(uv as string) >= 14 && <img src={UVFull} />}
                 <p className='uv-text'>{parseInt(uv as string)}</p>
-                <p className='uv-sub-title'>High level</p>
+                <p className={isTextDark ? 'uv-sub-title' : 'uv-sub-title-light'}>High level</p>
             </div>
         )
     } else if (component === "wind") {
         return (
             <div className='card-component'>
                 <p className='title-card-meteo'>Wind statut</p>
-                <p className='text-wind'>{wind}km/h </p>
+                <p className={isTextDark ? 'text-wind' : 'text-wind-light'}>{wind}km/h </p>
             </div>
         )
 
@@ -64,11 +65,11 @@ export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visi
                 <div style={{display: 'flex', justifyContent: 'space-around'}}>
                     <div>
                         <img src={sunriseImg} />
-                        <p>{sunrise}</p>
+                        <p className={isTextDark ? 'dark-text' : 'light-text'} >{sunrise}</p>
                     </div>
                     <div>
                         <img src={sunsetImg} />
-                        <p>{sunset} </p>
+                        <p className={isTextDark ? 'dark-text' : 'light-text'}>{sunset} </p>
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@ export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visi
         return (
             <div className='card-component'>
                 <p className='title-card-meteo'>Humidity</p>
-                <p className='text-wind'>{humidity}% </p>
+                <p className={isTextDark ? 'text-wind' : 'text-wind-light'}>{humidity}% </p>
             </div>
         )
 
@@ -86,7 +87,7 @@ export const CardMeteo = ({ component, uv, wind, sunrise, sunset, humidity, visi
         return (
             <div className='card-component'>
                 <p className='title-card-meteo'>Visibility</p>
-                <p className='text-wind'>{parseInt(visibility as string) / 1000}km </p>
+                <p className={isTextDark ? 'text-wind' : 'text-wind-light'}>{parseInt(visibility as string) / 1000}km </p>
             </div>
         )
 

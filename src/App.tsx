@@ -19,6 +19,7 @@ function App() {
   const [sunset, setSunset] = useState('')
   const [humidity, setHumidity] = useState('')
   const [visibility, setVisibility] = useState('')
+  const [isTextDark, setIsTextDark]= useState(false)
   useEffect(() => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -44,12 +45,16 @@ function App() {
           setVisibility(data?.hourly?.visibility[0])
           if (data?.hourly?.rain[0] > 0) {
             setBackgroundImage('img-background-rainy')
+            setIsTextDark(false)
           } else if (data?.hourly?.temperature_2m[0] < 20 && data.hourly.temperature_2m[0] >= 16) {
             setBackgroundImage('img-background-cloudly')
+            setIsTextDark(false)
           } else if (data?.hourly?.temperature_2m[0] >= 20) {
             setBackgroundImage('img-background-sunny')
+            setIsTextDark(true)
           } else if (data?.hourly?.temperature_2m[0] < 16) {
             setBackgroundImage('img-background-mostly-sunny')
+            setIsTextDark(true)
           }
 
         }
@@ -69,16 +74,16 @@ function App() {
           <Input className='input' placeholder="Search by ..." />
         </div>
         <div className='div-container' >
-          <CardTemperature temperature={temperature} backroundImage={backgroundImage} />
+          <CardTemperature isTextDark={isTextDark} temperature={temperature} backroundImage={backgroundImage} />
           <div className='separator-vertical'></div>
           <div>
-            <p className='title-temp'>Today’s highlights</p>
+            <p  className={isTextDark ? 'title-temp' : 'title-temp-light'}>Today’s highlights</p>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            <CardMeteo component='uv' uv={uv_index} />
-            <CardMeteo component='wind' wind={wind} />
-            <CardMeteo component='sunrise' sunrise={sunrise} sunset={sunset} />
-            <CardMeteo component='Humidity' humidity={humidity} />
-            <CardMeteo component='Visibility' visibility={visibility} />
+            <CardMeteo isTextDark={isTextDark} component='uv' uv={uv_index} />
+            <CardMeteo isTextDark={isTextDark} component='wind' wind={wind} />
+            <CardMeteo isTextDark={isTextDark} component='sunrise' sunrise={sunrise} sunset={sunset} />
+            <CardMeteo isTextDark={isTextDark} component='Humidity' humidity={humidity} />
+            <CardMeteo isTextDark={isTextDark} component='Visibility' visibility={visibility} />
             </div>
             
           </div>
