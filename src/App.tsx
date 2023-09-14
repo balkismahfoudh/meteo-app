@@ -9,6 +9,8 @@ import { CardTemperature } from './components/CardTemperature';
 const { Search } = Input;
 function App() {
   const [dataMeteo, setDataMeteo] = useState({})
+  const [latitude, setLatitude] = useState(34);
+  const [longitude, setLongitude] = useState(9);
   const [backgroundImage, setBackgroundImage] = useState('')
   const [temperature, setTemperature] = useState('')
   const [uv_index, setUvIndex] = useState('')
@@ -18,7 +20,17 @@ function App() {
   const [humidity, setHumidity] = useState('')
   const [visibility, setVisibility] = useState('')
   useEffect(() => {
-    getTemperature(34, 9)
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      }, function (error) {
+        console.error('Error getting geolocation:', error);
+      });
+    } else {
+      console.error('Geolocation is not available in this browser.');
+    }
+    getTemperature(latitude, longitude)
       .then((data: any) => {
         if (data) {
           console.log(data, 'dataaa')
