@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const BASE_URL = 'https://api.open-meteo.com/v1/forecast';
 
 
