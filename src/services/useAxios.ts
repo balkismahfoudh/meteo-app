@@ -10,9 +10,7 @@ export function useAxios() {
     const getTemperatureAxios = (latitude: any, longitude: any) => {
         axios.get(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,rain,visibility,windspeed_10m&daily=sunrise,sunset,uv_index_max&timezone=GMT`)
         .then((response) => {
-          console.log("axiosss:",response.data,"response");
           setMeteoData(response.data) ;
-          console.log(meteoData, "meteo data")
         })
         .catch((error) => {
           console.error(error);
