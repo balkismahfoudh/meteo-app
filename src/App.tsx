@@ -7,7 +7,7 @@ import { useAxios } from './services/useAxios';
 
 const { Search } = Input;
 function App() {
-  const [locations, setLocations] = useState(['Tunisia', 'MontReal', 'France', 'Italy']);
+  const [locations, setLocations] = useState(['Monastir', 'Tunisia', 'MontReal', 'France', 'Italy', 'Spain']);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [backgroundImage, setBackgroundImage] = useState('')
@@ -30,6 +30,13 @@ function App() {
       setLatitude(46)
       setLongitude(2)
     }
+    else if(value.toLowerCase() === 'monastir') {
+      setLatitude(35.778)
+      setLongitude(10.8262)
+    } else if(value.toLowerCase() === 'spain') {
+      setLatitude(40)
+      setLongitude(-4)
+    }
 
     setTimeout(() => {
       getTemperatureAxios(latitude, longitude);
@@ -39,18 +46,17 @@ function App() {
 
   
   useEffect(() => {
-    
     if (meteoData) {
-      if (parseInt(meteoData?.hourly?.rain[0])  > 0) {
+      if (parseInt(meteoData?.current?.rain)  > 0) {
         setBackgroundImage('img-background-rainy')
         setIsTextDark(false)
-      } else if (parseInt(meteoData?.hourly?.temperature_2m[0]) < 20 && parseInt(meteoData.hourly.temperature_2m[0]) >= 16) {
+      } else if (parseInt(meteoData?.current?.apparent_temperature) < 20 && parseInt(meteoData.current.apparent_temperature) >= 16) {
         setBackgroundImage('img-background-cloudly')
         setIsTextDark(false)
-      } else if (parseInt(meteoData?.hourly?.temperature_2m[0]) >= 20) {
+      } else if (parseInt(meteoData?.current?.apparent_temperature) >= 20) {
         setBackgroundImage('img-background-sunny')
         setIsTextDark(true)
-      } else if (parseInt(meteoData?.hourly?.temperature_2m[0]) < 16) {
+      } else if (parseInt(meteoData?.current?.apparent_temperature) < 16) {
         setBackgroundImage('img-background-mostly-sunny')
         setIsTextDark(true)
       }
@@ -94,15 +100,15 @@ function App() {
           <Input className='input' placeholder="Search by ..." />
         </div>
         <div className='div-container' >
-          <CardTemperature isTextDark={isTextDark} temperature={meteoData.hourly.temperature_2m[0]} backroundImage={backgroundImage} />
+          <CardTemperature isTextDark={isTextDark} temperature={meteoData.current.apparent_temperature} backroundImage={backgroundImage} />
           <div className='separator-vertical'></div>
           <div>
             <p className={isTextDark ? 'title-temp' : 'title-temp-light'}>Today’s highlights</p>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               <CardMeteo isTextDark={isTextDark} component='uv' uv={meteoData?.daily?.uv_index_max[0]} />
-              <CardMeteo isTextDark={isTextDark} component='wind' wind={meteoData?.hourly?.windspeed_10m[0]} />
+              <CardMeteo isTextDark={isTextDark} component='wind' wind={meteoData?.current?.windspeed_10m} />
               <CardMeteo isTextDark={isTextDark} component='sunrise' sunrise={meteoData?.daily?.sunrise[0]?.split('T')[1]} sunset={meteoData?.daily?.sunset[0]?.split('T')[1]} />
-              <CardMeteo isTextDark={isTextDark} component='Humidity' humidity={meteoData?.hourly?.relativehumidity_2m[0]} />
+              <CardMeteo isTextDark={isTextDark} component='Humidity' humidity={meteoData?.current?.relativehumidity_2m} />
               <CardMeteo isTextDark={isTextDark} component='Visibility' visibility={meteoData?.hourly?.visibility[0]} />
             </div>
 
